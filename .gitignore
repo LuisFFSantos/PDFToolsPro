@@ -1,0 +1,30 @@
+# Ambiente virtual
+venv/
+env/
+
+# Cache Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Dados temporários
+*.log
+*.tmp
+*.bak
+
+# Arquivos locais e temporários
+.DS_Store
+Thumbs.db
+
+# Cache do Streamlit
+.streamlit/cache/
+.streamlit/config.toml
+
+# PDFs gerados
+*.pdf
+
+# Excel de testes
+*.xlsx
+
+# Diretórios de saída
+/output/
