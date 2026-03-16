@@ -1,11 +1,13 @@
 # Ambiente virtual
+.venv/
 venv/
 env/
 
 # Cache Python
 __pycache__/
-*.py[cod]
+*.pyc
 *.pyo
+*.pyd
 
 # Dados temporários
 *.log
@@ -19,6 +21,8 @@ Thumbs.db
 # Cache do Streamlit
 .streamlit/*
 !.streamlit/config.toml
+.env
+.streamlit/secrets.toml
 
 # PDFs gerados
 *.pdf
@@ -28,3 +32,8 @@ Thumbs.db
 
 # Diretórios de saída
 /output/
+
+# Sistema/IDE
+.vscode/
+.idea/
+.DS_Store
