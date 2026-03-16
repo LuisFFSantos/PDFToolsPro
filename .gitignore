@@ -17,8 +17,8 @@ __pycache__/
 Thumbs.db
 
 # Cache do Streamlit
-.streamlit/cache/
-.streamlit/config.toml
+.streamlit/*
+!.streamlit/config.toml
 
 # PDFs gerados
 *.pdf

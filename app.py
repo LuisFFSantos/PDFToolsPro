@@ -5,6 +5,8 @@ import menu_combinar
 import menu_extrair
 import menu_marca_dagua
 import menu_imagens
+import menu_organizar
+import menu_comprimir
 
 st.set_page_config(
     page_title='PDFToolsPro - LTA',
@@ -27,6 +29,8 @@ entradas_menu = {
     'Combinar PDFs': 'plus-square-fill',
     "Adicionar marca d'água": 'droplet-fill',
     'Imagens para PDF': 'file-earmark-richtext-fill',
+    'Organizar PDF': 'layout-wtf',
+    'Comprimir PDF': 'file-zip-fill',
 }
 
 
@@ -50,6 +54,10 @@ with col2:
             menu_marca_dagua.exibir_menu_marca_dagua(coluna=col2)
         case 'Imagens para PDF':
             menu_imagens.exibir_menu_imagens(coluna=col2)
+        case 'Organizar PDF':
+            menu_organizar.exibir_menu_organizar(coluna=col2)
+        case 'Comprimir PDF':
+            menu_comprimir.exibir_menu_comprimir(coluna=col2)
         case _:
             st.warning('Implementar página')
         
