@@ -55,6 +55,7 @@ def exibir_menu_organizar(coluna):
         )
 
         if not arquivo_pdf:
+            st.session_state.pop("organizar_arquivo_id", None)
             return
 
         pdf_bytes = arquivo_pdf.read()
@@ -65,6 +66,15 @@ def exibir_menu_organizar(coluna):
             return
 
         total_paginas = len(leitor.pages)
+
+        # Detecta troca de arquivo usando hash do conteúdo
+        import hashlib
+        arquivo_id = hashlib.md5(pdf_bytes[:4096] + len(pdf_bytes).to_bytes(8, "little")).hexdigest()
+        if st.session_state.get("organizar_arquivo_id") != arquivo_id:
+            st.session_state["organizar_arquivo_id"] = arquivo_id
+
+        # Prefixo único por arquivo: garante widgets sempre frescos ao trocar de arquivo
+        wk = st.session_state["organizar_arquivo_id"][:8]
 
         st.info(f"PDF carregado: **{total_paginas} página(s)**")
 
@@ -86,7 +96,7 @@ def exibir_menu_organizar(coluna):
                 if page_idx >= total_paginas:
                     break
                 with cols[col_offset]:
-                    rot_atual = st.session_state.get(f"rot_{page_idx}", 0)
+                    rot_atual = st.session_state.get(f"rot_{wk}_{page_idx}", 0)
                     thumb = _renderizar_thumbnail(pdf_bytes, page_idx, rot_atual)
                     if thumb:
                         st.image(thumb, use_container_width=True)
@@ -100,14 +110,14 @@ def exibir_menu_organizar(coluna):
                         options=[0, 90, 180, 270],
                         format_func=lambda x: _LABELS_ROTACAO[x],
                         index=0,
-                        key=f"rot_{page_idx}",
+                        key=f"rot_{wk}_{page_idx}",
                         label_visibility="collapsed",
                     )
                     rotacoes[page_idx] = rot
 
                     excluir[page_idx] = st.checkbox(
                         "Excluir",
-                        key=f"del_{page_idx}",
+                        key=f"del_{wk}_{page_idx}",
                     )
 
         # ── Reordenar ─────────────────────────────────────────────────────────
