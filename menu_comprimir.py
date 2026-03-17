@@ -1,4 +1,5 @@
 import streamlit as st
+import pypdf
 import fitz
 from io import BytesIO
 
@@ -99,6 +100,9 @@ def exibir_menu_comprimir(coluna):
             disabled=arquivo_pdf is None,
         ):
             pdf_bytes = arquivo_pdf.read()
+            if pypdf.PdfReader(BytesIO(pdf_bytes)).is_encrypted:
+                st.error("Este PDF está protegido por senha. Remova a senha primeiro usando a função **Remover senha**.")
+                return
             tamanho_original = len(pdf_bytes)
 
             with st.spinner("Comprimindo..."):

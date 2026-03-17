@@ -23,6 +23,9 @@ def exibir_menu_extrair(coluna):
 
         if arquivo_pdf:
             leitor = pypdf.PdfReader(arquivo_pdf)
+            if leitor.is_encrypted:
+                st.error("Este PDF está protegido por senha. Remova a senha primeiro usando a função **Remover senha**.")
+                return
             total_paginas = len(leitor.pages)
             botoes_desativados = False
         else:

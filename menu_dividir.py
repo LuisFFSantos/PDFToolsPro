@@ -40,6 +40,9 @@ def exibir_menu_dividir(coluna):
 
         pdf_bytes = arquivo_pdf.read()
         leitor = pypdf.PdfReader(BytesIO(pdf_bytes))
+        if leitor.is_encrypted:
+            st.error("Este PDF está protegido por senha. Remova a senha primeiro usando a função **Remover senha**.")
+            return
         total = len(leitor.pages)
         st.info(f"PDF carregado: **{total} página(s)**")
 

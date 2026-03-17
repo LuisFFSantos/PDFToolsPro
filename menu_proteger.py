@@ -42,6 +42,9 @@ def exibir_menu_proteger(coluna):
                 return
 
             leitor = pypdf.PdfReader(arquivo_pdf)
+            if leitor.is_encrypted:
+                st.error("Este PDF já está protegido por senha. Remova a senha primeiro usando a função **Remover senha**.")
+                return
             escritor = pypdf.PdfWriter()
             for page in leitor.pages:
                 escritor.add_page(page)

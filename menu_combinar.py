@@ -27,7 +27,11 @@ def exibir_menu_combinar(coluna):
             disabled=botoes_desativados,
         )
         if clicou_processar:
-            dados_pdf = combinar_arquivos_pdf(arquivos_pdf=arquivos_pdf)
+            protegidos = [f.name for f in arquivos_pdf if pypdf.PdfReader(f).is_encrypted]
+            if protegidos:
+                st.error(f"Os seguintes arquivos estão protegidos por senha: **{', '.join(protegidos)}**. Remova as senhas antes de combinar.")
+            else:
+                dados_pdf = combinar_arquivos_pdf(arquivos_pdf=arquivos_pdf)
             nome_arquivo = f'combinado.pdf'
             st.download_button(
                 'Clique para fazer download do arquivo PDF...',
