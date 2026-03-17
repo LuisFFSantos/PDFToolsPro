@@ -14,7 +14,7 @@ _LABELS_ROTACAO = {
 }
 
 
-@st.cache_data(show_spinner=False)
+@st.cache_data(show_spinner=False, ttl=3600)
 def _renderizar_thumbnail(pdf_bytes: bytes, pagina_idx: int, rotacao: int = 0):
     try:
         import fitz

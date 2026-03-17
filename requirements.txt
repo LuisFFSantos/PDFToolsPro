@@ -6,4 +6,4 @@ pypdf==5.5.0
 pymupdf>=1.23.0
 streamlit==1.45.1
 streamlit-option-menu==0.4.0
-streamlit-sortables
+streamlit-sortables==0.3.1
