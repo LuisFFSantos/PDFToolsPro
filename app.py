@@ -19,7 +19,7 @@ st.set_page_config(
 )
 
 with st.sidebar:
-    st.title("📄 PDFToolsPro - LTA")
+    st.title("🛠️ PDFToolsPro - LTA")
     st.caption("Todas as ferramentas PDF em um só lugar")
     st.divider()
 

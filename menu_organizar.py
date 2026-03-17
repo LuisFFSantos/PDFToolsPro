@@ -111,7 +111,9 @@ def exibir_menu_organizar(coluna):
 
         paginas_ativas = [f"Pág. {i + 1}" for i in range(total_paginas) if not excluir.get(i, False)]
 
-        nova_ordem = sort_items(paginas_ativas, direction="horizontal", key="sortable_paginas")
+        # Key dinâmico: força o componente a recriar quando a lista muda
+        sort_key = "sortable_" + "_".join(paginas_ativas)
+        nova_ordem = sort_items(paginas_ativas, direction="horizontal", key=sort_key)
 
         # ── Inserir de outro PDF ──────────────────────────────────────────────
         st.markdown("### Inserir páginas de outro PDF *(opcional)*")

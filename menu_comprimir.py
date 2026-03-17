@@ -51,8 +51,10 @@ def _comprimir_pdf(pdf_bytes: bytes, nivel: str) -> bytes:
         mat = fitz.Matrix(escala, escala)
         pix = page.get_pixmap(matrix=mat, alpha=False)
         img_bytes = pix.tobytes("jpeg", jpg_quality=qualidade)
-        img_doc = fitz.open("jpeg", img_bytes)
-        novo_doc.insert_pdf(img_doc)
+
+        # Cria página com as dimensões originais (em pontos) e insere o JPEG
+        nova_pagina = novo_doc.new_page(width=page.rect.width, height=page.rect.height)
+        nova_pagina.insert_image(nova_pagina.rect, stream=img_bytes, keep_proportion=False)
 
     buf = BytesIO()
     novo_doc.save(buf, garbage=4, deflate=True)
